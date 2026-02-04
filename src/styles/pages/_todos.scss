@@ -1,0 +1,318 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.todos-page {
+  min-height: 100%;
+  background: $color-background;
+}
+
+// Header
+.header {
+  background: $color-login-background;
+  color: #fff;
+  padding: 24px;
+}
+
+.header-content {
+  max-width: $max-width-container;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.user-info {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+
+  @include tablet {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.2);
+  @include flex-center;
+  font-size: 24px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.user-details {
+  .user-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  .user-meta {
+    font-size: 14px;
+    opacity: 0.9;
+    margin: 4px 0;
+
+    .separator {
+      margin: 0 8px;
+      opacity: 0.5;
+    }
+  }
+}
+
+.logout-button {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: $radius-sm;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background $transition-fast;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  @include tablet {
+    align-self: flex-end;
+  }
+}
+
+// Main content
+.main-content {
+  max-width: $max-width-container;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: $color-text;
+  margin: 0 0 16px;
+
+  .todos-count {
+    font-weight: 400;
+    color: $color-text-muted;
+  }
+}
+
+// Create Todo Section
+.create-section {
+  @include card;
+  margin-bottom: 20px;
+}
+
+.create-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.create-input {
+  @include input-base;
+
+  &.user-id-input {
+    width: 100px;
+
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &.title-input {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+.add-button {
+  @include button-primary;
+}
+
+// Filters Section
+.filters-section {
+  @include card;
+  margin-bottom: 20px;
+}
+
+.filters-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+.filter-group {
+  @include flex-column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    font-weight: 600;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &.search-group {
+    flex: 1;
+    min-width: 200px;
+
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  @include tablet {
+    width: 100%;
+  }
+}
+
+.filter-select {
+  @include input-base;
+  background: $color-background-card;
+  cursor: pointer;
+  min-width: 140px;
+
+  @include tablet {
+    width: 100%;
+  }
+}
+
+.search-input {
+  @include input-base;
+  width: 100%;
+}
+
+// Todos Section
+.todos-section {
+  @include card;
+}
+
+.loading,
+.error,
+.empty {
+  text-align: center;
+  padding: 40px;
+  color: $color-text-muted;
+  font-size: 16px;
+}
+
+.error {
+  color: $color-error;
+}
+
+.todos-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: $color-background-item;
+  border-radius: $radius-md;
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  &.completed {
+    .todo-title {
+      text-decoration: line-through;
+      color: $color-text-muted;
+    }
+  }
+}
+
+.todo-status {
+  flex-shrink: 0;
+}
+
+.status-icon {
+  @include flex-center;
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-round;
+  background: $color-border;
+  color: $color-text-muted;
+  font-size: 14px;
+
+  &.done {
+    background: $color-success;
+    color: #fff;
+  }
+}
+
+.todo-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-title {
+  font-size: 15px;
+  color: $color-text;
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+
+.todo-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: $color-text-muted;
+}
+
+.todo-id {
+  font-family: monospace;
+}
+
+.favorite-button {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color $transition-fast, transform $transition-fast;
+  border-radius: $radius-round;
+
+  &:hover {
+    color: $color-favorite;
+    transform: scale(1.1);
+  }
+
+  &.active {
+    color: $color-favorite;
+  }
+}

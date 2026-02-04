@@ -1,0 +1,49 @@
+@use 'variables' as *;
+
+$header-height: 60px;
+$footer-height: 270px;
+$layout-bg: #474747;
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  height: $header-height;
+  background-color: $layout-bg;
+  flex-shrink: 0;
+
+  &__content {
+    max-width: $max-width-container;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+  }
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.app-footer {
+  height: $footer-height;
+  background-color: $layout-bg;
+  flex-shrink: 0;
+
+  &__content {
+    max-width: $max-width-container;
+    margin: 0 auto;
+    height: 100%;
+    padding: 24px;
+  }
+}
